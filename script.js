@@ -44,29 +44,31 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({top: 0, behavior: 'smooth'});
     });
 
-    // Typing Effect
-    Const typingText = document.querySelector('.typing-text');
+    // --- Efeito de Máquina de Escrever com Múltiplos Textos ---
+    const typingText = document.querySelector('.typing-text');
     
-    // 1. Array de textos a serem exibidos
-    Const texts = [
+    // 1. Array de textos a serem exibidos (ADICIONE OU REMOVA TEXTOS AQUI)
+    const texts = [
         "Desenvolvedor em formação",
         "Apaixonado por JavaScript",
         "Aprender é crescer",
+        "Eu crio animações incríveis!",
+        "Dominando o front-end",
         "Pronto para o próximo desafio!"
     ];
     
     let textIndex = 0; // Índice do array de textos
     let charIndex = 0; // Índice do caractere dentro do texto atual
-    const typingSpeed = 100;
-    const erasingSpeed = 50;
-    const newTextDelay = 2000;
+    const typingSpeed = 100; // Velocidade de digitação (milissegundos)
+    const erasingSpeed = 50; // Velocidade para apagar
+    const newTextDelay = 2000; // Tempo de pausa antes de apagar/digitar
     
     if (typingText) {
         
         // Função principal para iniciar o ciclo
         function startTypingCycle() {
             if (texts.length > 0) {
-                setTimeout(type, 500); // Começa a digitar
+                setTimeout(type, 500);
             }
         }
 
@@ -110,9 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         startTypingCycle(); // Inicia o processo
     }
-
-        type();
-    }
+    // --------------------------------------------------------------------
 
     // Animate Skill Bars
     function animateSkillBars() {
