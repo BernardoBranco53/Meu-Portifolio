@@ -45,31 +45,72 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Typing Effect
-    const typingText = document.querySelector('.typing-text');
+    Const typingText = document.querySelector('.typing-text');
+    
+    // 1. Array de textos a serem exibidos
+    Const texts = [
+        "Desenvolvedor em formação",
+        "Apaixonado por JavaScript",
+        "Aprender é crescer",
+        "Pronto para o próximo desafio!"
+    ];
+    
+    let textIndex = 0; // Índice do array de textos
+    let charIndex = 0; // Índice do caractere dentro do texto atual
+    const typingSpeed = 100;
+    const erasingSpeed = 50;
+    const newTextDelay = 2000;
+    
     if (typingText) {
-        const text = "Desenvolvedor em formação";
-        let index = 0;
         
+        // Função principal para iniciar o ciclo
+        function startTypingCycle() {
+            if (texts.length > 0) {
+                setTimeout(type, 500); // Começa a digitar
+            }
+        }
+
+        // 2. Função Type (Digitar)
         function type() {
-            if (index < text.length) {
-                typingText.textContent += text.charAt(index);
-                index++;
-                setTimeout(type, 100);
+            const currentText = texts[textIndex];
+            
+            if (charIndex < currentText.length) {
+                // Adiciona o próximo caractere
+                typingText.textContent += currentText.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingSpeed);
             } else {
-                setTimeout(erase, 2000);
+                // Terminou de digitar, espera e começa a apagar
+                setTimeout(erase, newTextDelay);
             }
         }
         
+        // 3. Função Erase (Apagar)
         function erase() {
-            if (index > 0) {
-                typingText.textContent = text.substring(0, index - 1);
-                index--;
-                setTimeout(erase, 50);
+            const currentText = texts[textIndex];
+            
+            if (charIndex > 0) {
+                // Remove o último caractere
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingSpeed);
             } else {
+                // Terminou de apagar, move para o próximo texto
+                textIndex++;
+                
+                // Se for o último texto, volta para o primeiro (loop infinito)
+                if (textIndex >= texts.length) {
+                    textIndex = 0;
+                }
+                
+                // Começa a digitar o novo texto
                 setTimeout(type, 500);
             }
         }
         
+        startTypingCycle(); // Inicia o processo
+    }
+
         type();
     }
 
